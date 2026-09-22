@@ -8,6 +8,7 @@ This file is for doing data important
 ```{r}
 library(tidyverse)
 library(readxl)
+library(haven)
 ```
 
 #import 2 CSVs
@@ -107,5 +108,18 @@ towers_df =
              )
 
 towers_df
+```
+
+## Import SAS
+
+Read in the PULSE data set
+
+```{r}
+pulse_df = 
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
+
+pulse_df
 ```
 
