@@ -9,6 +9,10 @@ This file is for doing data important
 library(tidyverse)
 library(janitor)
 ```
+
+#import 2 CSVs
+
+
 Import our first dataset
 
 ```{r}
@@ -20,5 +24,38 @@ litters_df =
 litters_df = janitor::clean_names(litters_df)
 
 #added unscores between words of variable names (snake case)
+```
+Import second dataset
+
+```{r}
+pups_df = 
+  read_csv("data/FAS_pups.csv", skip=3)
+
+# do not need to say file = because it assumes that
+# skip = n skips n number of rows at the top when importing the data set
+
+pups_df = janitor::clean_names(pups_df)
+```
+## Look at the data 
+
+```{r}
+litters_df
+pups_df
+```
+
+Head or tail
+```{r}
+head(litters_df, 20)
+
+tail(pups_df, 5)
+
+#head shows the first n amount of rows of the data set
+#tail shows the last n amount of rows of the data set
+```
+
+Skimming?
+
+```{r}
+skimr::skim(pups_df)
 ```
 
