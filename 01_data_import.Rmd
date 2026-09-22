@@ -2,3 +2,23 @@
 title: "Data Import"
 output: github_document
 ---
+
+This file is for doing data important
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+Import our first dataset
+
+```{r}
+litters_df = 
+  read_csv(file = "data/FAS_litters.csv")
+
+#this dataset used both "NA" and "." to indicate missing data
+
+litters_df = janitor::clean_names(litters_df)
+
+#added unscores between words of variable names (snake case)
+```
+
