@@ -17,7 +17,10 @@ Import our first dataset
 
 ```{r}
 litters_df = 
-  read_csv(file = "data/FAS_litters.csv")
+  read_csv(
+    file = "data/FAS_litters.csv", 
+    na = c("", "NA", ".")
+    )
 
 #this dataset used both "NA" and "." to indicate missing data
 
@@ -29,7 +32,11 @@ Import second dataset
 
 ```{r}
 pups_df = 
-  read_csv("data/FAS_pups.csv", skip=3)
+  read_csv(
+    "data/FAS_pups.csv", 
+           skip=3, 
+           na = c("", "NA", ".")
+  )
 
 # do not need to say file = because it assumes that
 # skip = n skips n number of rows at the top when importing the data set
@@ -59,3 +66,4 @@ Skimming?
 skimr::skim(pups_df)
 ```
 
+## Oh excel...
