@@ -121,3 +121,16 @@ mutate(pups_df,
        new_pd = pd_walk - 7)
 ```
 
+
+## `arrange` the data
+
+```{r}
+arrange(litters_df, pups_born_alive)
+
+# sorts it by ascending of the selected variable
+
+arrange(litters_df, desc(pups_born_alive))
+
+# sorts it by descending of the selected variable
+```
+
