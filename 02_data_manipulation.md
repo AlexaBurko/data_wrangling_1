@@ -2286,3 +2286,74 @@ pups_df =
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Sometimes the first thing isn’t a dataframe
+
+``` r
+litters_df |>
+  lm(gd18_weight ~ gd0_weight, data = _)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = gd18_weight ~ gd0_weight, data = litters_df)
+    ## 
+    ## Coefficients:
+    ## (Intercept)   gd0_weight  
+    ##      15.342        1.084
+
+``` r
+# it would also work if you just did this
+lm(gd18_weight ~ gd0_weight, data = litters_df)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = gd18_weight ~ gd0_weight, data = litters_df)
+    ## 
+    ## Coefficients:
+    ## (Intercept)   gd0_weight  
+    ##      15.342        1.084
+
+Select vs pull
+
+``` r
+litters_df |>
+  select(group)
+```
+
+    ## # A tibble: 31 × 1
+    ##    group
+    ##    <chr>
+    ##  1 con7 
+    ##  2 con7 
+    ##  3 con7 
+    ##  4 con7 
+    ##  5 mod7 
+    ##  6 mod7 
+    ##  7 mod7 
+    ##  8 mod7 
+    ##  9 mod7 
+    ## 10 mod7 
+    ## # ℹ 21 more rows
+
+``` r
+litters_df |>
+  pull(group)
+```
+
+    ##  [1] "con7" "con7" "con7" "con7" "mod7" "mod7" "mod7" "mod7" "mod7" "mod7"
+    ## [11] "mod7" "low7" "low7" "low7" "low7" "low7" "low7" "low7" "low7" "mod8"
+    ## [21] "mod8" "mod8" "mod8" "mod8" "low8" "low8" "low8" "low8" "low8" "low8"
+    ## [31] "low8"
+
+never do `$`
+
+``` r
+litters_df$group
+```
+
+    ##  [1] "con7" "con7" "con7" "con7" "mod7" "mod7" "mod7" "mod7" "mod7" "mod7"
+    ## [11] "mod7" "low7" "low7" "low7" "low7" "low7" "low7" "low7" "low7" "mod8"
+    ## [21] "mod8" "mod8" "mod8" "mod8" "low8" "low8" "low8" "low8" "low8" "low8"
+    ## [31] "low8"
