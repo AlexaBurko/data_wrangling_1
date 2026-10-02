@@ -109,6 +109,15 @@ analysis_df |>
     values_from = mean_outcome
   ) |> 
   knitr::kable()
+
+# pivot_wider is the inverse of pivot_longer
+
+# "names_from = time" makes it so the values of the variable "time" become new variables instead of the variable "time"
+
+# "values_from = mean_outcome" makes it so the values from the variable "mean_outcome" become the values of the new variables "pre" and "post", which came from the old "time" variable
+
+# "knitr::kable()" just makes the table look nicer in the output
+
 ```
 
 ### bind some rows
