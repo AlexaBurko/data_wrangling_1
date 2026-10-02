@@ -17,7 +17,8 @@ pulse_df =
   haven::read_sas("data/public_pulse_data.sas7bdat") |> 
   janitor::clean_names()
 
-# we want bdi_score to be one col
+# haven loads datasets from sas
+# we want bdi_score to be one columns, right now it is 4 different columns
 ```
 
 # Okay, let's tidy
@@ -33,6 +34,16 @@ pulse_tidy_df =
   mutate(
     visit = replace(visit, visit=="bl", "00m") # bl = baseline
   )
+
+# "bdi_score_bl:bdi_score_12m" means that all of the following code applies to all the variables in between and including the ones listed
+
+# "names_to = "visit"" makes it so the names of those previous listed variables become the values of a new variable called visit
+
+# "names_prefix = "bdi_score_"" removes that prefix (bdi_score_) from all the values in the new "visit" variable
+
+# "values_to = "bdi_score"" makes it so the values of the previous listed variables are put into a new variable called bdi_score
+
+# "mutate(visit = replace(visit, visit=="bl", "00m")" makes it so values of the variable visit that are equal to "bl" become equal to "00m"
 ```
 
 Just use once...
