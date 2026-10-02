@@ -136,6 +136,8 @@ two_towers_df =
 return_df = 
   readxl::read_excel("data/LotR_Words.xlsx", range = "J3:L6") |> 
   mutate(movie = "return of the king")
+
+# "mutate(movie = "name of movie")" creates a new variable called "movie" where all of the values of that variable are "name of movie"
 ```
 
 Next put all of these together and tidy
@@ -150,6 +152,11 @@ lotr_df =
     names_to = "gender",
     values_to = "words"
   )
+
+# "bind_rows" stacks datasets on top of each other
+# "relocate()" brings the listed variable to the front of the dataset
+# "names_to = "gender"" makes it so there is a new variable called "gender" that takes the variables "female" and "male" (and any variables in between, but there wasnt any in this case) as its values and removes the female and male variables
+# "values_to = "words"" takes the values of the female and male variables and makes them the values of a new variable called "words"
 ```
 
 ## joion FAS datasets
@@ -170,6 +177,8 @@ pups_df =
     )
   )
 
+# case_match does the same thing as recode_values. The current name of the value is on the left side, what you want to change it to is on the right side. 
+
 litters_df = 
   read_csv("data/FAS_litters.csv",
            na = c(".", "", "NA")) |> 
@@ -182,7 +191,15 @@ litters_df =
     gd_weight_gain = gd18_weight - gd0_weight
   )
 
+# the untidied dataset had it so the group variable encoded both dose and day of treatment. Dose was either Con, Mod, or Low and day of treatment was either 7 or 8
+
+# "separate(group, into = c("dose", "day_of_tx"), 3)" makes it so the variable "group" is separated into two different variables called "dose" and "day_of_tx", with the values of "dose" being the first 3 characters of the values of "group" and the values of "day_of_tx" being all the remaining characters of the values of "group". The group variable is also removed. 
+
+# "dose = str_to_lower(dose)" makes all of the characters in the values of "dose" lowercase
+
 fas_df = 
   left_join(pups_df, litters_df, by = "litter_number")
+
+# left_join adds the data from a y dataset (the second dataset listed in the argument) into a  x dataset (the first dataset in the argument) without removing anything from x.
 ```
 
