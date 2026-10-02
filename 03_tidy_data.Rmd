@@ -60,13 +60,15 @@ pulse_df =
   mutate(
     visit = replace(visit, visit=="bl", "00m") # bl = baseline
   )
+
+# this does everything from the last chunk in one step instead of first loading the dataset and then tidying it
 ```
 
 Let's practice!
 
-Import the litters data, keep columns litter number and GD weights; and tidy.
+In the litters data, the variables gd0_weight and gd18_weight give the weight of the mother mouse on gestational days 0 and 18. Write a data cleaning chain that retains only litter_number and these columns; produces new variables gd and weight; and makes gd a numeric variable taking values 0 and 18
 ```{r}
-litters_df =
+litters_df2 =
   read_csv( 
     file = "data/FAS_litters.csv", 
     na = c("", "NA", ".")
@@ -79,13 +81,14 @@ litters_df =
     values_to = "weight"
   ) |> 
   mutate(
-    gd = case_match(
+    gd = recode_values(
       gd,
       "gd0_weight" ~ 0,
       "gd18_weight" ~ 18
     )
   )
   
+# this part "mutate(gd = recode_values(gd, "gd0_weight" ~ 0, "gd18_weight" ~ 18) makes it so, for the variable gd, the values that are gd0_weight should be renamed to 0 and the values that are gd18_weight should be renamed to 18
 ```
 
 ## Deliberately untidy data
